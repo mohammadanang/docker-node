@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
 const task_condition = require("./lib/task-condition")
+const loop_for = require('./lib/loop/loop_for')
+const loop_foreach = require('./lib/loop/loop_foreach')
+const loop_map = require('./lib/loop/loop_map')
 
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -21,6 +24,27 @@ app.get("/task1", (req, res) => {
 app.post("/task2", (req, res) => {
     let { name, email } = req.body
     let result = task_condition.task2(name, email)
+
+    return res.send(result)
+})
+
+app.get("/loop-for", (req, res) => {
+    let data = ["Red", "Blue", "Green"]
+    let result = loop_for(data)
+
+    return res.send(result)
+})
+
+app.get("/loop-foreach", (req, res) => {
+    let data = ["Red", "Blue", "Green"]
+    let result = loop_foreach(data)
+
+    return res.send(result)
+})
+
+app.get("/loop-map", (req, res) => {
+    let data = ["Red", "Blue", "Green"]
+    let result = loop_map(data)
 
     return res.send(result)
 })
