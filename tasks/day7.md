@@ -10,6 +10,7 @@
     - **updated_at**, tipe data *date*
 3. Buat fungsi insert ke dalam collection/table User
 4. Cek nilai masing-masing input harus sesuai dengan tipe datanya
+5. Nilai dari email harus dikonversi menjadi huruf kecil semua
 5. Buat route untuk memanggil fungsi insert yang telah dibuat
 
 ##### [Task 2] Buat fungsi get semua data dari collection/table task 1
