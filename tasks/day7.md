@@ -6,6 +6,8 @@
     - **name**, tipe data *string*
     - **email**, tipe data *string*
     - **phone**, tipe data *number*
+    - **created_at**, tipe data *date*
+    - **updated_at**, tipe data *date*
 3. Buat fungsi insert ke dalam collection/table User
 4. Cek nilai masing-masing input harus sesuai dengan tipe datanya
 5. Buat route untuk memanggil fungsi insert yang telah dibuat
