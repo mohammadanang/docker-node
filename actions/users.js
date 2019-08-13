@@ -37,7 +37,20 @@ const getAll = async () => {
     }
 }
 
+const getDetail = async (id) => {
+    try {
+        let query = await User.findOne({
+            _id: id
+        }).exec()
+
+        return query
+    } catch(err) {
+        throw err
+    }
+}
+
 module.exports = {
     create,
-    getAll
+    getAll,
+    getDetail
 }

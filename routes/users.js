@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { create, getAll } = require("../actions/users")
+const { create, getAll, getDetail } = require("../actions/users")
 
 router.post("/", async (req, res) => {
     try {
@@ -27,6 +27,24 @@ router.get("/", async (req, res) => {
             status: "success",
             data,
             message: "Get all user data"
+        })
+    } catch(err) {
+        return res.status(400).json({
+            status: "error",
+            message: err.message
+        })
+    }
+})
+
+router.get("/:id", async (req, res) => {
+    try {
+        let { id } = req.params
+        let data = await getDetail(id)
+
+        return res.status(200).json({
+            status: "success",
+            data,
+            message: "Get user detail successfully!"
         })
     } catch(err) {
         return res.status(400).json({
