@@ -56,12 +56,11 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     let { id } = req.params
-    let { name, email, phone, fresh } = req.body
     let updated_data = {
-        name,
-        email,
-        phone,
-        fresh
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone,
+        fresh: req.body.fresh
     }
 
     try {
