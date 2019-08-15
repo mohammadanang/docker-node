@@ -5,7 +5,6 @@ const User = require("../models/user")
 const create = (req) => {
     let { title, description, price, author } = req.body
     price = parseInt(price)
-    console.log(`Value of price ${price}`)
 
     if(isInteger(price) === false) {
         return "Wrong type of `price`"
@@ -32,7 +31,6 @@ const getAll = async () => {
                 model: User
             }
         ]).exec()
-    console.log(`Result ${query}`)
 
     return query
 }
