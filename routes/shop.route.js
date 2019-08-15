@@ -9,7 +9,8 @@ router.post("/", async (req, res, next) => {
 
         return res.status(201).json({
             status: "success",
-            data
+            data,
+            message: "Shop created successfully"
         })
     } catch(err) {
         return res.status(400).json({
@@ -25,7 +26,8 @@ router.get("/", async (req, res, next) => {
 
         return res.status(200).json({
             status: "success",
-            data
+            data,
+            message: "Get all shop data"
         })
     } catch(err) {
         return res.status(400).json({
@@ -39,6 +41,7 @@ router.get("/:id", async (req, res, next) => {
     try {
         let { id } = req.params
         let data = await new ShowShop(id).exec()
+        console.log(`Type of ShowShop is ${typeof ShowShop}`)
 
         return res.status(200).json({
             status: "success",
