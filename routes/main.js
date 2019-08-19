@@ -9,8 +9,8 @@ const routes = (app) => {
     app.use("/", index)
     app.use("/auth", auth)
     app.use("/book", books)
-    app.use("/shop", shops)
-    app.use("/user", verifyToken(), users)
+    app.use("/shop", verifyToken(), shops)
+    app.use("/user", users)
 }
 
 module.exports = routes
