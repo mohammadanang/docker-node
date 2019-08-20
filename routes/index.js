@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const moment = require("moment")
 const mongoose = require('mongoose')
-const SendMail = require("../actions/emails/send.action")
+const SendMail = require("../actions/emails/send-mailtrap.action")
 
 router.get('/', (req, res) => {
     db_status = mongoose.connection.readyState
