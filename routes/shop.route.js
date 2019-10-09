@@ -24,11 +24,19 @@ router.post("/", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
     try {
         let data = await Shop.all()
+        data = data.data
+        let meta = {
+            total: data.total,
+            limit: data.limit,
+            page: data.page,
+            pages: data.pages
+        }
 
         return res.status(200).json({
             status: "success",
+            message: "Get all shop data",
             data,
-            message: "Get all shop data"
+            meta
         })
     } catch(err) {
         return res.status(400).json({
