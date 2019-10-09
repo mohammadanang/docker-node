@@ -1,5 +1,4 @@
 const ShopModel = require("../models/shop.model")
-const ListShop = require("../actions/shops/list.action")
 
 class Shop {
     static async create(req) {
@@ -21,13 +20,7 @@ class Shop {
 
     static async all() {
         try {
-            let search = {}
-            let params = {
-                limit: 50,
-                page: 1
-            }
-
-            let data = await new ListShop(search, params).exec()
+            let data = await ShopModel.find({}).exec()
 
             return data
         } catch(err) {
