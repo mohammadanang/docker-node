@@ -13,6 +13,7 @@ let bookSchema = new Schema({
         default: 0
     },
     author: String,
+    shop_id: String,
     created_at: {
         type: Date,
         default: Date.now

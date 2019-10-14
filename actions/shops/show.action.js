@@ -11,6 +11,10 @@ class ShowShop {
                 _id: this.id
             }).exec()
 
+            if(query === null) {
+                throw new Error("Shop not found")
+            }
+
             return query
         } catch(err) {
             throw err
