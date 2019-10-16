@@ -1,46 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const { create, getAll, getDetail, update, destroy } = require("../actions/users")
-const { check, validationResult, body } = require("express-validator")
+const { check } = require("express-validator")
 const jwt = require("jsonwebtoken")
+const UserList = require("../actions/users/list.action")
+const UserCreate = require("../actions/users/create.action")
 
 router.post("/", [
     check('name').not().isEmpty(),
     check('email').not().isEmpty(),
-    check('password').not().isEmpty().isLength({ min: 8 }),
-    check('password_confirmation').not().isEmpty(),
-    body('password_confirmation').custom((value, { req }) => {
-        if(value != req.body.password) {
-            throw new Error('Password confirmation does not match')
-        } else {
-            return true
-        }
-    })
-], async (req, res) => {
-    const errors = validationResult(req)
-
-    if (!errors.isEmpty()) {
-        return res.status(422).json({
-            status: "error",
-            message: errors.array()
-        })
-    }
-
-    try {
-        let data = await create(req)
-
-        return res.status(200).json({
-            status: "success",
-            data,
-            message: "User created successfully!"
-        })
-    } catch(err) {
-        return res.status(400).json({
-            status: "error",
-            message: err.message
-        })
-    }
-})
+    check('password').not().isEmpty().isLength({ min: 8 })
+], async (req, res, next) => await new UserCreate().exec(req, res, next))
 
 router.get("/", async (req, res) => {
     try {
@@ -58,6 +28,9 @@ router.get("/", async (req, res) => {
         })
     }
 })
+
+router.get("/list", async (req, res, next) => 
+    await new UserList().exec(req, res, next))
 
 router.get("/my-profile", async (req, res) => {
     try {
