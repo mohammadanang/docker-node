@@ -3,9 +3,11 @@ class Action {
         this.model = model
     }
 
-    async list() {
+    async list(params) {
         try {
-            let data = await this.model.find({}).exec()
+            let data = await this.model.find(
+                params
+            ).exec()
 
             return data
         } catch(err) {
