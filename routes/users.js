@@ -5,6 +5,7 @@ const { check } = require("express-validator")
 const jwt = require("jsonwebtoken")
 const UserList = require("../actions/users/list.action")
 const UserCreate = require("../actions/users/create.action")
+const AllUser = require("../actions/users/all.action")
 
 router.post("/", [
     check('name').not().isEmpty(),
@@ -14,7 +15,7 @@ router.post("/", [
 
 router.get("/", async (req, res) => {
     try {
-        let data = await getAll()
+        let data = await new AllUser().exec()
 
         return res.send({
             status: "success",

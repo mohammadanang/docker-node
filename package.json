@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "main": "app.js",
     "dependencies": {
+        "api-inti": "^1.0.1",
         "bcryptjs": "^2.4.3",
         "dotenv": "^8.0.0",
         "express": "^4.16.4",
