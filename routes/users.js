@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const UserList = require("../actions/users/list.action")
 const UserCreate = require("../actions/users/create.action")
 const AllUser = require("../actions/users/all.action")
+const { response } = require("api-inti")
 
 router.post("/", [
     check('name').not().isEmpty(),
@@ -17,11 +18,9 @@ router.get("/", async (req, res) => {
     try {
         let data = await new AllUser().exec()
 
-        return res.send({
-            status: "success",
-            data,
-            message: "Get all user data"
-        })
+        return res.send(
+            response.success(null , "Get all user data", data)
+        )
     } catch(err) {
         return res.status(400).json({
             status: "error",
