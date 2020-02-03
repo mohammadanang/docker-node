@@ -7,6 +7,7 @@ const UserList = require("../actions/users/list.action")
 const UserCreate = require("../actions/users/create.action")
 const AllUser = require("../actions/users/all.action")
 const { response } = require("api-inti")
+const UserController = require("../controllers/users.controller")
 
 router.post("/", [
     check('name').not().isEmpty(),
@@ -31,6 +32,8 @@ router.get("/", async (req, res) => {
 
 router.get("/list", async (req, res, next) => 
     await new UserList().exec(req, res, next))
+
+router.get("/list-v2", async (req, res) => await UserController.index(req, res))
 
 router.get("/my-profile", async (req, res) => {
     try {

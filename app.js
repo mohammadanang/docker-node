@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const http = require("http").Server(app)
 require("./db") // database connection
-const io    = require("socket.io")(http),
-    redis   = require("redis"),
-    client  = redis.createClient()
+// const io    = require("socket.io")(http),
+//     redis   = require("redis"),
+//     client  = redis.createClient()
 
 // for parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
@@ -20,19 +20,20 @@ http.listen(process.env.PORT, () => {
     console.log(`Example app listening on port ${process.env.PORT}`)
 })
 
-io.on('connection', (socket) => {
-    const subscribe = redis.createClient()
-    subscribe.subscribe('pubsub')
+// io.on('connection', (socket) => {
+//     const subscribe = redis.createClient()
+//     subscribe.subscribe('pubsub')
 
-    subscribe.on("message", (channel, message) => {
-        socket.send(message)
-    })
+//     subscribe.on("message", (channel, message) => {
+//         socket.send(message)
+//     })
 
-    socket.on("message", (msg) => {
-        client.publish('pubsub', msg)
-    })
+//     socket.on("message", (msg) => {
+        
+//         client.publish('pubsub', msg)
+//     })
 
-    socket.on("disconnect", () => {
-        subscribe.quit()
-    })
-})
+//     socket.on("disconnect", () => {
+//         subscribe.quit()
+//     })
+// })

@@ -4,6 +4,7 @@
 
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
+const mongoosePaginate = require("mongoose-paginate")
 
 let bookSchema = new Schema({
     title: String,
@@ -24,6 +25,7 @@ let bookSchema = new Schema({
     }
 })
 
+bookSchema.plugin(mongoosePaginate)
 let Book = mongoose.model("Book", bookSchema)
 
 module.exports = Book

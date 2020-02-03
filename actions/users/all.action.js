@@ -7,15 +7,13 @@ class All extends Api {
         super(User)
     }
 
-    async exec() {
+    async exec(params) {
         try {
-            let data = await this.list()
-
-            return data
+            return await this.list(params)
         } catch(err) {
             throw err
         }
     }
 }
 
-module.exports = All
+module.exports = new All()
