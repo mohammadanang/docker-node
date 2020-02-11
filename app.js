@@ -10,6 +10,7 @@ require("./db") // database connection
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname))
 
+require("./lib/listener")
 require('./routes/main')(app) // all routes imported
 
 app.get("/chat", (req, res, next) => {

@@ -3,6 +3,7 @@ const router = express.Router()
 const moment = require("moment")
 const mongoose = require('mongoose')
 const SendMail = require("../actions/emails/send-mailtrap.action")
+const publisher = require('../lib/publisher')
 
 router.get('/', (req, res) => {
     db_status = mongoose.connection.readyState
@@ -14,6 +15,24 @@ router.get('/', (req, res) => {
         server_time: moment().format(),
         database_status: db_status_name[db_status]
     })
+})
+
+router.post("/coba", async (req, res) => {
+    try {
+        let { shop_id, name } = req.body
+        let data = await publisher.createTask(method="update_shop(params)", { shop_id, name })
+
+        return res.send({
+            status: "success",
+            data,
+            message: "success"
+        })
+    } catch(err) {
+        return res.send({
+            status: "error",
+            message: err.message
+        })
+    }
 })
 
 router.post("/email", async (req, res) => {
