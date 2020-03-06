@@ -14,9 +14,17 @@ const shop = {
         } catch(err) {
             throw err
         }
+    },
+    test: async (data) => {
+        try {
+            console.log(`Listener test: ${JSON.stringify(data)}`)
+        } catch(e) {
+            console.log(`Listener test error: ${JSON.stringify(e)}`)
+        }
     }
 }
 
 module.exports = eventEmitter => {
     eventEmitter.on("shop.add-qty", shop.add_qty)
+    eventEmitter.once("shop.test", shop.test)
 }

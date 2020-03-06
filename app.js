@@ -10,7 +10,9 @@ require("./db") // database connection
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname))
 
-require("./lib/listener")
+require("api-inti").connection(process.env.HOST)
+
+// require("./lib/listener") // listening to rabbitmq
 require('./routes/main')(app) // all routes imported
 
 app.get("/chat", (req, res, next) => {

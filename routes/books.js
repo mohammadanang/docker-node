@@ -5,19 +5,49 @@ const { isString } = require("lodash")
 const CreateBook = require("../actions/books/create.action")
 const Book = require("../models/book")
 const Shop = require("../models/shop.model")
+const e = require("events")
+const ee = new e.EventEmitter()
+const ShopListener = require("../listeners/shop.listener")
+const { LogListener } = require("api-inti")
 
 router.post("/", async (req, res) => {
     try {
+        LogListener(ee)
+        // let on = ShopListener(ee)
+        // console.log(`on ${on}`)
+        
         let { title, description, price, author, shop_id } = req.body
-        price = parseInt(price)
-
-        let data = await new CreateBook({
+        let inputs = {
             title,
-            description,
-            price,
-            author,
-            shop_id
-        }).exec()
+            description
+        }
+        
+        if(price) {
+            price = parseInt(price)
+            inputs.price = price
+        }
+
+        if(author) {
+            inputs.author = author
+        }
+
+        if(shop_id) {
+            inputs.shop_id
+        }
+
+        let data = await new CreateBook(inputs).exec()
+
+        let log = {
+            model: "Books",
+            model_id: data._id,
+            value: data,
+            action: "create book",
+            type: "success",
+            notes: "Log create book success"
+        }
+        let logs = ee.emit("log.custom", log)
+        // let logs = ee.emit("shop.test", log)
+        console.log(`emit ${logs}`)
 
         return res.send({
             status: "success",
