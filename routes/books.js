@@ -9,6 +9,7 @@ const e = require("events")
 const ee = new e.EventEmitter()
 const ShopListener = require("../listeners/shop.listener")
 const { LogListener } = require("api-inti")
+const BookController = require("../controllers/books.controller")
 
 router.post("/", async (req, res) => {
     try {
@@ -119,5 +120,8 @@ router.get("/", async (req, res) => {
         })
     }
 })
+
+router.get("/list", async (req, res) => await BookController.index(req, res))
+router.get("/paginate", async (req, res) => await BookController.paginate(req, res))
 
 module.exports = router
