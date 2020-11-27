@@ -1,18 +1,16 @@
-const Book = require("../../models/book")
-const { Api } = require("api-inti")
+const { Api } = require('api-inti');
+const Book = require('../../models/book');
 
 class PaginateBook extends Api {
-    constructor() {
-        super(Book)
-    }
+  constructor() {
+    super(Book);
+  }
 
-    async exec(params, populate, options) {
-        try {
-            return await this.paginate(params, populate, options)
-        } catch(err) {
-            throw err
-        }
-    }
+  async exec(params, populate, options) {
+    const result = await this.paginate(params, populate, options);
+
+    return result;
+  }
 }
 
-module.exports = new PaginateBook()
+module.exports = new PaginateBook();

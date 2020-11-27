@@ -1,20 +1,16 @@
-const Message = require("../../models/message.model")
+const Message = require('../../models/message.model');
 
 class Create {
-    constructor(inputs) {
-        this.inputs = inputs
-    }
+  constructor(inputs) {
+    this.inputs = inputs;
+  }
 
-    async exec() {
-        try {
-            let data = new Message(this.inputs)
-            await data.save()
+  async exec() {
+    const data = new Message(this.inputs);
+    await data.save();
 
-            return data
-        } catch(err) {
-            throw err
-        }
-    }
+    return data;
+  }
 }
 
-module.exports = Create
+module.exports = Create;

@@ -1,15 +1,16 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-let resetPasswordSchema = new Schema({
-    email: String,
-    token: String,
-    created_at: {
-        type: Date,
-        default: Date.now()
-    }
-})
+const { Schema } = mongoose;
 
-let ResetPassword = mongoose.model("ResetPassword", resetPasswordSchema)
+const resetPasswordSchema = new Schema({
+  email: String,
+  token: String,
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+});
 
-module.exports = ResetPassword
+const ResetPassword = mongoose.model('ResetPassword', resetPasswordSchema);
+
+module.exports = ResetPassword;

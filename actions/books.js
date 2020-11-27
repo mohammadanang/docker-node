@@ -1,41 +1,41 @@
-const Book = require("../models/book")
-const { isInteger } = require("lodash")
-const User = require("../models/user.model")
+const { isInteger } = require('lodash');
+const Book = require('../models/book');
+const User = require('../models/user.model');
 
 const create = (req) => {
-    let { title, description, price, author } = req.body
-    price = parseInt(price)
+  const { title, description, price, author } = req.body;
 
-    if(isInteger(price) === false) {
-        return "Wrong type of `price`"
-    }
+  if (isInteger(price) === false) {
+    return 'Wrong type of `price`';
+  }
 
-    var insert_data = {
-        title,
-        description,
-        price,
-        author
-    }
+  const insert_data = {
+    title,
+    description,
+    price: parseInt(price, 10),
+    author,
+  };
 
-    let data = new Book(insert_data)
-    data.save()
+  const data = new Book(insert_data);
+  data.save();
 
-    return data
-}
+  return data;
+};
 
 const getAll = async () => {
-    let query = await Book.find({})
-        .populate([
-            {
-                path: 'author',
-                model: User
-            }
-        ]).exec()
+  const query = await Book.find({})
+    .populate([
+      {
+        path: 'author',
+        model: User,
+      },
+    ])
+    .exec();
 
-    return query
-}
+  return query;
+};
 
 module.exports = {
-    create,
-    getAll
-}
+  create,
+  getAll,
+};

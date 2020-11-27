@@ -2,24 +2,25 @@
  * User Schema
  */
 
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-let userSchema = new Schema({
-    name: String,
-    email: String,
-    phone: Number,
-    password: String,
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now
-    }
-})
+const { Schema } = mongoose;
 
-let User = mongoose.model("User", userSchema)
+const userSchema = new Schema({
+  name: String,
+  email: String,
+  phone: Number,
+  password: String,
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = User
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

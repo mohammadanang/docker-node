@@ -1,92 +1,74 @@
-const User = require("../models/user.model")
+const User = require('../models/user.model');
 
 const create = async (req) => {
-    let { name, email, phone } = req.body
-    phone = parseInt(phone)
-    var insert_data = {
-        name,
-        email,
-        phone
-    }
+  const { name, email, phone } = req.body;
+  const insert_data = {
+    name,
+    email,
+    phone: parseInt(phone, 10),
+  };
 
-    let data = new User(insert_data)
+  const data = new User(insert_data);
+  await data.save();
 
-    try {
-        await data.save()
-
-        return data
-    } catch(err) {
-        throw err
-    }
-}
+  return data;
+};
 
 const getAll = async () => {
-    try {
-        let query = await User.find({}).exec()
-        let data = query.map((v, i) => {
-            return {
-                name: v.name,
-                email: v.email,
-                phone: v.phone
-            }
-        })
+  const query = await User.find({}).exec();
+  const data = query.map((v) => {
+    return {
+      name: v.name,
+      email: v.email,
+      phone: v.phone,
+    };
+  });
 
-        return data
-    } catch(err) {
-        throw err
-    }
-}
+  return data;
+};
 
 const getDetail = async (id) => {
-    try {
-        let query = await User.findOne({
-            _id: id
-        }).exec()
+  const query = await User.findOne({
+    _id: id,
+  }).exec();
 
-        return query
-    } catch(err) {
-        throw err
-    }
-}
+  return query;
+};
 
 const update = async (id, updated_data) => {
-    let { name, email, phone, fresh } = updated_data
-    let opts = {
-        new: fresh === "true" ? true : false
-    }
-    let data = {
-        name,
-        email,
-        phone
-    }
+  const { name, email, phone, fresh } = updated_data;
+  const opts = {
+    new: fresh === 'true',
+  };
+  const data = {
+    name,
+    email,
+    phone,
+  };
 
-    try {
-        let query = await User.findOneAndUpdate({
-            _id: id
-        }, data, opts).exec()
+  const query = await User.findOneAndUpdate(
+    {
+      _id: id,
+    },
+    data,
+    opts
+  ).exec();
 
-        return query
-    } catch(err) {
-        throw err
-    }
-}
+  return query;
+};
 
 const destroy = async (id) => {
-    try {
-        let query = await User.findOneAndDelete({
-            _id: id
-        }).exec()
+  const query = await User.findOneAndDelete({
+    _id: id,
+  }).exec();
 
-        return query
-    } catch(err) {
-        throw err
-    }
-}
+  return query;
+};
 
 module.exports = {
-    create,
-    getAll,
-    getDetail,
-    update,
-    destroy
-}
+  create,
+  getAll,
+  getDetail,
+  update,
+  destroy,
+};

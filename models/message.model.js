@@ -1,30 +1,31 @@
 /**
  * Message Schema
  */
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
 
-let messageSchema = new Schema({
-    user_id: String,
-    content: String,
-    is_read: {
-        type: Boolean,
-        default: false
-    },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now
-    },
-    deleted_at: {
-        type: Date,
-        default: null
-    }
-})
+const { Schema } = mongoose;
 
-let Message = mongoose.model("Message", messageSchema)
+const messageSchema = new Schema({
+  user_id: String,
+  content: String,
+  is_read: {
+    type: Boolean,
+    default: false,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
+  deleted_at: {
+    type: Date,
+    default: null,
+  },
+});
 
-module.exports = Message
+const Message = mongoose.model('Message', messageSchema);
+
+module.exports = Message;

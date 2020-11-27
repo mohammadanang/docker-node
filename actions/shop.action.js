@@ -1,36 +1,28 @@
-const ShopModel = require("../models/shop.model")
+const ShopModel = require('../models/shop.model');
 
 class Shop {
-    static async create(req) {
-        try {
-            let { name, description, owner } = req.body
-            let data = new ShopModel({
-                name,
-                description,
-                owner
-            })
+  static async create(req) {
+    const { name, description, owner } = req.body;
+    const data = new ShopModel({
+      name,
+      description,
+      owner,
+    });
 
-            await data.save()
+    await data.save();
 
-            return data
-        } catch(err) {
-            throw err
-        }
-    }
+    return data;
+  }
 
-    static async all() {
-        try {
-            let data = await ShopModel.find({}).exec()
+  static async all() {
+    const data = await ShopModel.find({}).exec();
 
-            return data
-        } catch(err) {
-            throw err
-        }
-    }
+    return data;
+  }
 
-    hello() {
-        return 'Hello Shop!'
-    }
+  static hello() {
+    return 'Hello Shop!';
+  }
 }
 
-module.exports = Shop
+module.exports = Shop;

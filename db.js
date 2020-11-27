@@ -1,8 +1,9 @@
-let mongoose = require("mongoose")
-require("dotenv").config()
-var host = process.env.HOST
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const host = process.env.HOST;
 
 mongoose.connect(host, {
-    'useNewUrlParser': true
+  useNewUrlParser: true,
 });
 mongoose.set('useCreateIndex', true);
